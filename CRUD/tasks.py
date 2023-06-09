@@ -9,7 +9,7 @@ def create(db: Session, task: schemas.TaskCreate):
         title=task.title,
         description=task.description,
         state=task.state,
-        group_id=task.group_id
+        project_id=task.project_id
     )
     db.add(db_task)
     db.commit()
@@ -21,8 +21,8 @@ def get_one(db: Session, task_id: int):
     return db.query(models.Task).filter(models.Task.id == task_id).first()
 
 # Read All
-def get_all(db: Session, group_id: int):
-    return db.query(models.Task).filter(models.Task.group_id == group_id).all()
+def get_all(db: Session, project_id: int):
+    return db.query(models.Task).filter(models.Task.project_id == project_id).all()
 
 # Update
 def refresh(db: Session, task_id: int,  task: schemas.Task):
@@ -49,4 +49,4 @@ def delete(db: Session, task_id: int):
         db.close()
         return "Task deleted"
     else:
-        raise HTTPException(status_code=404, detail=f"group with id {group_id} not found")
+        raise HTTPException(status_code=404, detail=f"project with id {project_id} not found")

@@ -5,7 +5,7 @@ class TaskBase(BaseModel):
     title: str
     description: Union[str, None] = None
     state: bool
-    group_id: int
+    project_id: int
 
 class TaskCreate(TaskBase):
     pass
@@ -16,14 +16,14 @@ class Task(TaskBase):
     class Config:
         orm_mode = True
 
-class GroupBase(BaseModel):
+class ProjectBase(BaseModel):
     name: str
 
-class GroupCreate(GroupBase):
+class ProjectCreate(ProjectBase):
     pass
 
 
-class Group(GroupBase):
+class Project(ProjectBase):
     id: int
     tasks: list[Task] = []
 

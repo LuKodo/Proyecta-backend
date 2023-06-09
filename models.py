@@ -3,8 +3,8 @@ from sqlalchemy.orm import relationship
 
 from database import Base
 
-class Group(Base):
-    __tablename__ = "groups"
+class Project(Base):
+    __tablename__ = "projects"
 
     id = Column(Integer, primary_key=True, index=True)
     name = Column(String, index=True)
@@ -18,8 +18,8 @@ class Task(Base):
     title = Column(String, index=True)
     description = Column(String)
     state = Column(Boolean)
-    group_id = Column(Integer, ForeignKey("groups.id"))
+    project_id = Column(Integer, ForeignKey("projects.id"))
 
-    owner = relationship("Group", back_populates="tasks")
+    owner = relationship("Project", back_populates="tasks")
 
 
